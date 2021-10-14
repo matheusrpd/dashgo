@@ -1,10 +1,15 @@
-import { Box, Flex, Heading, Icon, Table, Button, Thead, Tr, Th, Checkbox, Tbody, Td, Text} from "@chakra-ui/react";
+import { Box, Flex, Heading, Icon, Table, Button, Thead, Tr, Th, Checkbox, Tbody, Td, Text, useBreakpointValue } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <Box>
       <Header />
@@ -38,17 +43,17 @@ export default function UserList() {
           <Table colorScheme="whiteAlpha">
             <Thead>
               <Tr>
-                <Th px="6" w="8" color="gray.300">
+                <Th px={["4", "4", "6"]} w="8" color="gray.300">
                   <Checkbox colorScheme="pink"/>
                 </Th>
                 <Th>Usuários</Th>
-                <Th>Data de cadastro</Th>
-                <Th w="8"></Th>
+                { isWideVersion && <Th>Data de cadastro</Th> }
+                { isWideVersion && <Th w="8"></Th> }
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td px="6">
+                <Td px={["4", "4", "6"]}>
                   <Checkbox colorScheme="pink"/>
                 </Td>
                 <Td>
@@ -57,21 +62,23 @@ export default function UserList() {
                     <Text fontSize="sm" color="gray.300">matheusrpd@gmail.com</Text>
                   </Box>
                 </Td>
-                <Td>13 de Outubro, 2021</Td>
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon
-                      as={RiPencilLine}
-                      fontSize="16"
-                    />}
-                  >
-                    Editar
-                  </Button>
-                </Td>
+                { isWideVersion && <Td>13 de Outubro, 2021</Td> }
+                { isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon
+                        as={RiPencilLine}
+                        fontSize="16"
+                      />}
+                    >
+                      Editar
+                    </Button>
+                  </Td>
+                )}
               </Tr>
             </Tbody>
           </Table>
